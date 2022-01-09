@@ -42,6 +42,12 @@
             </div>
           </div>
         </div>
+        <nav>
+          <i class="fas fa-home"></i>
+          <i class="fas fa-search-location"></i>
+          <i class="fas fa-chart-line"></i>
+          <i class="fas fa-cog"></i>
+        </nav>
       </div>
       <div class="rightContainer"></div>
     </div>
@@ -242,6 +248,23 @@
                   }
                 }
               }
+            }
+          }
+        }
+        nav {
+          @include center-sb;
+          width: calc(100% - 78px);
+          height: 10%;
+          padding: 0 40px;
+
+          i {
+            color: rgb(255, 255, 255);
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              color: rgb(75, 224, 133);
             }
           }
         }
