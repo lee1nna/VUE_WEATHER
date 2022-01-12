@@ -51,10 +51,69 @@
         height: 15%;
 
         p {
-          font-size: 2.5rem;
+          text-align: center;
+          font-size: 2.25rem;
           font-weight: 500;
           font-family: 'Be Vietnam Pro', sans-serif;
           color: #fff;
+        }
+      }
+      .detail {
+        width: 100%;
+        height: 85%;
+
+        .title {
+          @include center;
+          width: 100%;
+          height: 19%;
+          color: white;
+        }
+        .data {
+          display: flex;
+          width: 100%;
+          height: 13.5%;
+          // background-color: rgb(187, 127, 255);
+
+          .dataName {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+
+            p {
+              &:first-child {
+                display: block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #ffde23;
+                margin-left: 50px;
+              }
+              &:last-child {
+                margin-left: 10px;
+                color: white;
+                font-weight: 300;
+                font-size: 0.9rem;
+              }
+            }
+          }
+          .dataValue {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            width: 50%;
+            height: 100%;
+
+            p {
+              color: white;
+              font-weight: 300;
+              margin-right: 50px;
+
+              span {
+                font-weight: 600;
+              }
+            }
+          }
         }
       }
     }
