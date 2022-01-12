@@ -4,6 +4,59 @@
   width: 324px;
   height: 700px;
   border-radius: 50px;
-  background: linear-gradient(#16455f, #0e1239);
+  background: linear-gradient(#cb0000, #0e1239);
   box-shadow: 5px 5px 10px gray;
+
+  #contentsBox {
+    width: 100%;
+    height: 62.5%;
+
+    .buttonBox {
+      @include center;
+      width: 100%;
+      height: 20%;
+
+      .buttonBackground {
+        width: 224px;
+        height: 35px;
+        background-color: #370505;
+        border-radius: 10px;
+        display: flex;
+
+        button {
+          width: 112px;
+          height: 35px;
+          border: 0;
+          border-radius: 7.5px;
+          outline: 0;
+          cursor: pointer;
+          &.forecast {
+            background-color: transparent;
+            color: #a52727;
+          }
+          &.airquality {
+            background: #ff0000;
+            color: white;
+          }
+        }
+      }
+    }
+    .weatherBox {
+      width: 100%;
+      height: 80%;
+
+      .airCondition {
+        @include center;
+        width: 100%;
+        height: 15%;
+
+        p {
+          font-size: 2.5rem;
+          font-weight: 500;
+          font-family: 'Be Vietnam Pro', sans-serif;
+          color: #fff;
+        }
+      }
+    }
+  }
 }

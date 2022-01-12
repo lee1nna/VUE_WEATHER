@@ -1,11 +1,6 @@
 <template>
   <div class="leftContainer">
-    <div id="cityNameBox">
-      <div class="cityName">
-        <p>San Fransisco</p>
-        <p>Jan 28, 2022</p>
-      </div>
-    </div>
+    <CityNameBox />
     <div id="contentsBox">
       <div class="buttonBox">
         <div class="buttonBackground">
@@ -59,6 +54,8 @@
 </template>
 
 <script>
+  import CityNameBox from './common/CityNameBox.vue';
+
   export default {
     data() {
       return {
@@ -78,6 +75,7 @@
         ],
       };
     },
+    components: { CityNameBox },
   };
 </script>
 
