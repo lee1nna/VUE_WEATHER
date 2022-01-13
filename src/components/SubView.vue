@@ -30,14 +30,34 @@
         </div>
       </div>
     </div>
+    <div id="todayWeather">
+      <div class="textBox">
+        <p>시간대별 대기 정보</p>
+        <p>이번주 전체 보기</p>
+      </div>
+      <div class="timelyWeatherBox">
+        <div class="timelyWeather">
+          <div class="data">
+            <p class="time">2pm</p>
+            <p class="currentData">매우나쁨</p>
+            <div>
+              <img src="~/assets/dust.png" alt="" />
+              <p class="fall">15 <span>&#181;g/m&#179;</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <NavUnderBar />
   </div>
 </template>
 
 <script>
   import CityNameBox from './common/CityNameBox.vue';
+  import NavUnderBar from './common/NavUnderBar.vue';
 
   export default {
-    components: { CityNameBox },
+    components: { CityNameBox, NavUnderBar },
     data() {
       return {
         airConditions: [

@@ -44,17 +44,13 @@
         </div>
       </div>
     </div>
-    <nav>
-      <i class="fas fa-home"></i>
-      <i class="fas fa-search-location"></i>
-      <i class="fas fa-chart-line"></i>
-      <i class="fas fa-cog"></i>
-    </nav>
+    <NavUnderBar />
   </div>
 </template>
 
 <script>
   import CityNameBox from './common/CityNameBox.vue';
+  import NavUnderBar from './common/NavUnderBar.vue';
 
   export default {
     data() {
@@ -75,7 +71,7 @@
         ],
       };
     },
-    components: { CityNameBox },
+    components: { CityNameBox, NavUnderBar },
   };
 </script>
 
