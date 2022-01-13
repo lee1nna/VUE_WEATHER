@@ -53,25 +53,35 @@
   import NavUnderBar from './common/NavUnderBar.vue';
 
   export default {
+    components: { CityNameBox, NavUnderBar },
     data() {
       return {
-        weather: [
-          {
-            title: '습도',
-            value: '88%',
-          },
-          {
-            title: '풍속',
-            value: '10m/s',
-          },
-          {
-            title: '풍향',
-            value: 'WS',
-          },
+        totalResults: [
+          // {
+          //   title: '습도',
+          //   value: '88%',
+          // },
+          // {
+          //   title: '풍속',
+          //   value: '10m/s',
+          // },
+          // {
+          //   title: '풍향',
+          //   value: 'WS',
+          // },
         ],
       };
     },
-    components: { CityNameBox, NavUnderBar },
+    mounted() {
+      // Store의 Mutations를 실행할 때는, .commit() 메서드를
+      // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
+      this.$store.dispatch('onedayData/oneDayData', {
+        lat: 37.5833,
+        lon: 127,
+      });
+      this.totalResults = this.$store.state.weatherData;
+      console.log(this.totalResults);
+    },
   };
 </script>
 
