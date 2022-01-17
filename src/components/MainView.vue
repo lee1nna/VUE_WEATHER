@@ -57,18 +57,18 @@
     data() {
       return {
         totalResults: [
-          // {
-          //   title: '습도',
-          //   value: '88%',
-          // },
-          // {
-          //   title: '풍속',
-          //   value: '10m/s',
-          // },
-          // {
-          //   title: '풍향',
-          //   value: 'WS',
-          // },
+          {
+            title: '습도',
+            value: '88%',
+          },
+          {
+            title: '풍속',
+            value: '10m/s',
+          },
+          {
+            title: '풍향',
+            value: 'WS',
+          },
         ],
       };
     },
@@ -79,8 +79,6 @@
         lat: 37.5833,
         lon: 127,
       });
-      this.totalResults = this.$store.state.weatherData;
-      console.log(this.totalResults);
     },
   };
 </script>
