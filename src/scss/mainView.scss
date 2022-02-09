@@ -100,7 +100,7 @@
             }
             &:last-child {
               font-family: 'Poppins', sans-serif;
-              font-size: 0.85rem;
+              font-size: 0.9rem;
               font-weight: 200;
             }
           }
@@ -141,6 +141,13 @@
       padding: 0 30px;
       overflow: scroll;
 
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+      }
+
       .timelyWeather {
         display: flex;
         width: 126px;
@@ -151,12 +158,6 @@
 
         &:last-child {
           margin-right: -15px;
-        }
-
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-        &::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Opera*/
         }
 
         .icon {
