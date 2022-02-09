@@ -30,16 +30,16 @@
         <p>이번주 날씨 보기</p>
       </div>
       <div class="timelyWeatherBox">
-        <div class="timelyWeather">
+        <div class="timelyWeather" v-for="(weather, index) in timeleyWeather" :key="index">
           <div class="icon">
             <img src="~/assets/29.png" alt="" />
           </div>
           <div class="data">
-            <p class="time">2pm</p>
-            <p class="currentDegree">32&deg;</p>
+            <p class="time">{{ Unix_timestamp(weather.dt) }}</p>
+            <p class="currentDegree">{{ Math.round(weather.temp) }}&deg;</p>
             <div>
               <img src="~/assets/drop.png" alt="" />
-              <p class="fall">15%</p>
+              <p class="fall">{{ weather.humidity }}%</p>
             </div>
           </div>
         </div>
@@ -63,6 +63,7 @@
         temp: {},
         humidity: {},
         windSpeed: {},
+        time: {},
         subData: [
           {
             title: '날씨',
@@ -77,6 +78,7 @@
             value: '',
           },
         ],
+        timeleyWeather: [],
       };
     },
     created() {
@@ -93,6 +95,7 @@
           this.cityName = res.data.name;
           this.totalData = res.data;
           this.temp = res.data.main.temp;
+          this.time = res.data.dt;
 
           this.description = res.data.weather[0].description;
           this.humidity = res.data.main.humidity;
@@ -105,6 +108,30 @@
         .catch((error) => {
           console.log(error);
         });
+
+      const API_KEY2 = '1a5ef29484ff347e2245cf1814b07c77';
+      var lat = 37.5683;
+      var lon = 126.9778;
+
+      axios
+        .get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY2}&units=metric`)
+        .then((response) => {
+          console.log(response);
+          for (let i = 0; i < 24; i++) {
+            this.timeleyWeather[i] = response.data.hourly[i];
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    methods: {
+      // 타임스탬프로 변환
+      Unix_timestamp(t) {
+        var date = new Date(t * 1000);
+        var hour = '0' + date.getHours();
+        return hour.substr(-2) + '시';
+      },
     },
   };
 </script>
