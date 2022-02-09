@@ -1,14 +1,28 @@
 <template>
   <div id="cityNameBox">
     <div class="cityName">
-      <p>San Fransisco</p>
-      <p>Jan 28, 2022</p>
+      <p>{{ cityName }}</p>
+      <p>{{ currentDate }}</p>
     </div>
   </div>
 </template>
 
 <script>
-  export default {};
+  import dayjs from 'dayjs';
+  import 'dayjs/locale/ko';
+  dayjs.locale('ko'); // global로 한국어 locale 사용
+
+  export default {
+    props: ['cityName'],
+    // props: {
+    //   cityName: String,
+    // },
+    data() {
+      return {
+        currentDate: dayjs().format('YYYY. MM. DD. ddd'), // display
+      };
+    },
+  };
 </script>
 
 <style lang="scss" scoped>

@@ -9,7 +9,7 @@
 
   #contentsBox {
     width: 100%;
-    height: 62.5%;
+    height: 45%;
 
     .buttonBox {
       @include center;
@@ -48,7 +48,7 @@
       .airCondition {
         @include center;
         width: 100%;
-        height: 15%;
+        height: 45%;
 
         p {
           text-align: center;
@@ -60,18 +60,18 @@
       }
       .detail {
         width: 100%;
-        height: 85%;
+        height: 55%;
 
         .title {
           @include center;
           width: 100%;
-          height: 19%;
+          height: 30%;
           color: white;
         }
         .data {
           display: flex;
           width: 100%;
-          height: 13%;
+          height: 23.33%;
           // background-color: rgb(187, 127, 255);
 
           .dataName {
@@ -111,93 +111,6 @@
 
               span {
                 font-weight: 600;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  #todayWeather {
-    width: 100%;
-    height: 17.5%;
-
-    .textBox {
-      @include center-sb;
-      width: calc(100% - 70px);
-      height: 35%;
-      padding: 0 35px;
-      font-family: 'Noto Sans KR', sans-serif;
-
-      p {
-        font-weight: 400;
-        font-size: 0.8rem;
-        color: white;
-        text-align: center;
-
-        &:last-child {
-          font-weight: 400;
-          font-size: 0.8rem;
-          color: #ff0000;
-          cursor: pointer;
-        }
-      }
-    }
-    .timelyWeatherBox {
-      display: flex;
-      align-items: center;
-      width: calc(100% - 70px);
-      height: 65%;
-      padding: 0 30px;
-      .timelyWeather {
-        display: flex;
-        width: 100px;
-        height: 70px;
-        background-color: #ff0000;
-        border-radius: 20px;
-        .data {
-          @include c-center-se;
-          width: 100%;
-          height: 100%;
-
-          p {
-            @include center;
-            width: 100%;
-            height: 33.33%;
-            color: whitesmoke;
-            font-family: 'Poppins', sans-serif;
-
-            &.time {
-              font-size: 0.8rem;
-              font-weight: 200;
-            }
-            &.currentData {
-              font-size: 1rem;
-            }
-          }
-
-          div {
-            @include center;
-            width: 100%;
-            height: 33.33%;
-            position: relative;
-
-            img {
-              position: absolute;
-              right: 50%;
-              transform: translateX(-100%);
-              height: 80%;
-            }
-            .fall {
-              @include center;
-              position: absolute;
-              left: 50%;
-              transform: translateX(-35%);
-              font-size: 0.9rem;
-              font-family: 'Poppins', sans-serif;
-
-              span {
-                font-size: 0.5rem;
               }
             }
           }

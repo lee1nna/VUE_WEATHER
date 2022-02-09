@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <Map class="map" />
     <div class="container">
       <MainView />
       <SubView />
@@ -11,9 +10,8 @@
 <script>
   import MainView from '~/components/MainView.vue';
   import SubView from '../components/SubView.vue';
-  import Map from '../components/Map.vue';
 
-  export default { components: { MainView, SubView, Map } };
+  export default { components: { MainView, SubView } };
 </script>
 
 <style lang="scss" scoped>
@@ -26,12 +24,6 @@
     font-size: 16px;
     position: relative;
 
-    .map {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
     .container {
       @include center-sb;
       width: 55%;

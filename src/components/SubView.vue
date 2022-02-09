@@ -30,24 +30,7 @@
         </div>
       </div>
     </div>
-    <div id="todayWeather">
-      <div class="textBox">
-        <p>시간대별 대기 정보</p>
-        <p>이번주 전체 보기</p>
-      </div>
-      <div class="timelyWeatherBox">
-        <div class="timelyWeather">
-          <div class="data">
-            <p class="time">2pm</p>
-            <p class="currentData">매우나쁨</p>
-            <div>
-              <img src="~/assets/dust.png" alt="" />
-              <p class="fall">15 <span>&#181;g/m&#179;</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Map />
     <NavUnderBar />
   </div>
 </template>
@@ -55,9 +38,10 @@
 <script>
   import CityNameBox from './common/CityNameBox.vue';
   import NavUnderBar from './common/NavUnderBar.vue';
+  import Map from './common/Map.vue';
 
   export default {
-    components: { CityNameBox, NavUnderBar },
+    components: { CityNameBox, NavUnderBar, Map },
     data() {
       return {
         airConditions: [
@@ -72,18 +56,6 @@
           {
             air: '오존',
             value: 16,
-          },
-          {
-            air: '이산화질소',
-            value: 103.4,
-          },
-          {
-            air: '이산화황',
-            value: 10.5,
-          },
-          {
-            air: '일산화탄소',
-            value: 916,
           },
         ],
       };

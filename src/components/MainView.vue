@@ -1,6 +1,6 @@
 <template>
   <div class="leftContainer">
-    <CityNameBox />
+    <CityNameBox :city-name="cityName" />
     <div id="contentsBox">
       <div class="buttonBox">
         <div class="buttonBackground">
@@ -10,15 +10,16 @@
       </div>
       <div class="weatherBox">
         <div class="weatherDegree">
-          <p>10&deg;</p>
+          <!-- Math.round() 이 메서드는 소수점 반올림 메서드이다. -->
+          <p>{{ Math.round(temp) }}&deg;</p>
         </div>
         <div class="weatherIcon">
           <img src="~/assets/43.png" alt="" />
         </div>
         <div class="weatherData">
-          <div v-for="weatherValue in weather" :key="weatherValue" class="detailData">
-            <p>{{ weatherValue.title }}</p>
-            <p>{{ weatherValue.value }}</p>
+          <div v-for="subDataValue in subData" :key="subDataValue" class="detailData">
+            <p>{{ subDataValue.title }}</p>
+            <p>{{ subDataValue.value }}</p>
           </div>
         </div>
       </div>
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import CityNameBox from './common/CityNameBox.vue';
   import NavUnderBar from './common/NavUnderBar.vue';
 
@@ -56,29 +58,53 @@
     components: { CityNameBox, NavUnderBar },
     data() {
       return {
-        totalResults: [
+        cityName: {},
+        totalData: {},
+        temp: {},
+        humidity: {},
+        windSpeed: {},
+        subData: [
+          {
+            title: '날씨',
+            value: '',
+          },
           {
             title: '습도',
-            value: '88%',
+            value: '',
           },
           {
             title: '풍속',
-            value: '10m/s',
-          },
-          {
-            title: '풍향',
-            value: 'WS',
+            value: '',
           },
         ],
       };
     },
-    mounted() {
+    created() {
       // Store의 Mutations를 실행할 때는, .commit() 메서드를
       // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
-      this.$store.dispatch('onedayData/oneDayData', {
-        lat: 37.5833,
-        lon: 127,
-      });
+      const API_KEY = 'bf55a4cfb052a4396983999d7b9a9e6d';
+      var CITY_NAME = 'Seoul';
+      // https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${api_key}&units=metric
+      // https://api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${api_key}&units=metric
+      axios
+        .get(`https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}&units=metric`)
+        .then((res) => {
+          console.log(res);
+          this.cityName = res.data.name;
+          this.totalData = res.data;
+          this.temp = res.data.main.temp;
+
+          this.description = res.data.weather[0].description;
+          this.humidity = res.data.main.humidity;
+          this.windSpeed = res.data.wind.speed;
+
+          this.subData[0].value = this.description;
+          this.subData[1].value = this.humidity + '%';
+          this.subData[2].value = Math.round(this.windSpeed) + 'm/s';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   };
 </script>
