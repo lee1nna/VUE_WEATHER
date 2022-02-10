@@ -15,6 +15,7 @@
         </div>
         <div class="weatherIcon">
           <img src="~/assets/43.png" alt="" />
+          <!-- <img :src="images[0]" alt="" /> -->
         </div>
         <div class="weatherData">
           <div v-for="subDataValue in subData" :key="subDataValue" class="detailData">
@@ -29,10 +30,10 @@
         <p>시간대별 날씨 정보</p>
         <p>이번주 날씨 보기</p>
       </div>
-      <div class="timelyWeatherBox">
-        <div class="timelyWeather" v-for="(weather, index) in timeleyWeather" :key="index">
+      <ul class="timelyWeatherBox">
+        <li class="timelyWeather" v-for="(weather, index) in timeleyWeather" :key="index">
           <div class="icon">
-            <img :src="require(images[index])" alt="" />
+            <img :src="images[index]" alt="" />
           </div>
           <div class="data">
             <p class="time">{{ Unix_timestamp(weather.dt) }}</p>
@@ -42,8 +43,8 @@
               <p class="fall">{{ weather.humidity }}%</p>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
     <NavUnderBar />
   </div>
@@ -121,12 +122,62 @@
           for (let i = 0; i < 24; i++) {
             this.timeleyWeather[i] = response.data.hourly[i];
 
-            var img = response.data.hourly[i].weather[0].icon;
-
+            var img = response.data.hourly[i].weather[0].icon; // '01d'
             this.images[i] = `http://openweathermap.org/img/wn/${img}@2x.png`;
 
+            if (img == '01d') {
+              this.images[i] = 'src/assets/26.png';
+            }
+            if (img == '01n') {
+              this.images[i] = 'src/assets/10.png';
+            }
             if (img == '02d') {
-              this.images[i] = '@/assets/4.png';
+              this.images[i] = 'src/assets/27.png';
+            }
+            if (img == '02n') {
+              this.images[i] = 'src/assets/31.png';
+            }
+            if (img == '03d') {
+              this.images[i] = 'src/assets/33.png';
+            }
+            if (img == '03n') {
+              this.images[i] = 'src/assets/32.png';
+            }
+            if (img == '04d') {
+              this.images[i] = 'src/assets/35.png';
+            }
+            if (img == '04n') {
+              this.images[i] = 'src/assets/35.png';
+            }
+            if (img == '09d') {
+              this.images[i] = 'src/assets/5.png';
+            }
+            if (img == '09n') {
+              this.images[i] = 'src/assets/5.png';
+            }
+            if (img == '10d') {
+              this.images[i] = 'src/assets/8.png';
+            }
+            if (img == '10n') {
+              this.images[i] = 'src/assets/1.png';
+            }
+            if (img == '11d') {
+              this.images[i] = 'src/assets/17.png';
+            }
+            if (img == '11n') {
+              this.images[i] = 'src/assets/17.png';
+            }
+            if (img == '13d') {
+              this.images[i] = 'src/assets/18.png';
+            }
+            if (img == '13n') {
+              this.images[i] = 'src/assets/18.png';
+            }
+            if (img == '50d') {
+              this.images[i] = 'src/assets/6.png';
+            }
+            if (img == '50n') {
+              this.images[i] = 'src/assets/9.png';
             }
           }
         })
