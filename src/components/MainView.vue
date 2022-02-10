@@ -32,7 +32,7 @@
       <div class="timelyWeatherBox">
         <div class="timelyWeather" v-for="(weather, index) in timeleyWeather" :key="index">
           <div class="icon">
-            <img src="~/assets/29.png" alt="" />
+            <img :src="require(images[index])" alt="" />
           </div>
           <div class="data">
             <p class="time">{{ Unix_timestamp(weather.dt) }}</p>
@@ -79,6 +79,7 @@
           },
         ],
         timeleyWeather: [],
+        images: [],
       };
     },
     created() {
@@ -119,6 +120,14 @@
           console.log(response);
           for (let i = 0; i < 24; i++) {
             this.timeleyWeather[i] = response.data.hourly[i];
+
+            var img = response.data.hourly[i].weather[0].icon;
+
+            this.images[i] = `http://openweathermap.org/img/wn/${img}@2x.png`;
+
+            if (img == '02d') {
+              this.images[i] = '@/assets/4.png';
+            }
           }
         })
         .catch((error) => {
