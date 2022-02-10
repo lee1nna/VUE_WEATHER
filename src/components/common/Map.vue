@@ -75,6 +75,10 @@
             lating: new kakao.maps.LatLng(35.166611792579545, 126.84603104436039),
           },
           {
+            // 목포
+            lating: new kakao.maps.LatLng(34.823630139082525, 126.39766650967137),
+          },
+          {
             // 제주도
             lating: new kakao.maps.LatLng(33.5097, 126.5219),
           },

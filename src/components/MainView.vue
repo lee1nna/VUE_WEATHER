@@ -4,8 +4,12 @@
     <div id="contentsBox">
       <div class="buttonBox">
         <div class="buttonBackground">
-          <button class="forecast">Forecast</button>
-          <button class="airquality">Air Quality</button>
+          <button class="forecast">
+            Forecast
+          </button>
+          <button class="airquality">
+            Air Quality
+          </button>
         </div>
       </div>
       <div class="weatherBox">
@@ -14,11 +18,16 @@
           <p>{{ Math.round(temp) }}&deg;</p>
         </div>
         <div class="weatherIcon">
-          <img src="~/assets/43.png" alt="" />
-          <!-- <img :src="images[0]" alt="" /> -->
+          <!-- <img src="~/assets/43.png" alt="" /> -->
+          <img
+            :src="images[0]"
+            alt="" />
         </div>
         <div class="weatherData">
-          <div v-for="subDataValue in subData" :key="subDataValue" class="detailData">
+          <div
+            v-for="subDataValue in subData"
+            :key="subDataValue"
+            class="detailData">
             <p>{{ subDataValue.title }}</p>
             <p>{{ subDataValue.value }}</p>
           </div>
@@ -31,16 +40,29 @@
         <p>이번주 날씨 보기</p>
       </div>
       <ul class="timelyWeatherBox">
-        <li class="timelyWeather" v-for="(weather, index) in timeleyWeather" :key="index">
+        <li
+          class="timelyWeather"
+          v-for="(weather, index) in timeleyWeather"
+          :key="index">
           <div class="icon">
-            <img :src="images[index]" alt="" />
+            <img
+              :src="images[index]"
+              alt="MainWeatherIcon" />
           </div>
           <div class="data">
-            <p class="time">{{ Unix_timestamp(weather.dt) }}</p>
-            <p class="currentDegree">{{ Math.round(weather.temp) }}&deg;</p>
+            <p class="time">
+              {{ Unix_timestamp(weather.dt) }}
+            </p>
+            <p class="currentDegree">
+              {{ Math.round(weather.temp) }}&deg;
+            </p>
             <div>
-              <img src="~/assets/drop.png" alt="" />
-              <p class="fall">{{ weather.humidity }}%</p>
+              <img
+                src="~/assets/drop.png"
+                alt="" />
+              <p class="fall">
+                {{ weather.humidity }}%
+              </p>
             </div>
           </div>
         </li>

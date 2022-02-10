@@ -13,7 +13,12 @@
   dayjs.locale('ko'); // global로 한국어 locale 사용
 
   export default {
-    props: ['cityName'],
+    props: {
+      cityName: {
+        type: String,
+        default: 'Seoul',
+      },
+    },
     // props: {
     //   cityName: String,
     // },
