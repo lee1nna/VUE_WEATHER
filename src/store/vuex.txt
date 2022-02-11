@@ -74,3 +74,54 @@ searchData({ context }) {
 - getters/computed (계산된 데이터)
 "완성된 빵을 가져온다."
 => 이 과정은 뷰 컴포넌트에서 가공된 state를 가져오는 과정이다.
+
+----------------------------------------------------------------------------------------------------
+
+위에서도 설명했지만, 다시 한 번 Vuex 구성요소를 살펴보자.
+
+1. state
+- Vue 컴포넌트의 원본 소스 역할인 data로 볼 수 있다.
+- state는 mutations을 통해서만 data 변경하는 것을 권장한다.
+- 컴포넌트 내에서는 [this.$store.state.상태명] 으로 호출한다.
+
+2. mutations
+- state(상태)를 변경하는 방법이며, 메서드 역할은 한다.
+- 동기적으로 수행된다.
+- 컴포넌트에서는 [this.$store.commit('변이명')] 으로 호출한다.
+- 전달 값이 있다면 [this.$store.commit('변이명', payload)] 로 호출한다.
+
+3. actions
+- api 호출과 그 결과에 대해서 return 및 mutations(변이) 을/를 사용한다.
+- 비동기적으로 수행된다.
+- 컴포넌트에서는 [this.$store.dispatch('액션명')] 으로 호출한다.
+- 전달 값이 있다면 [this.$store.dispatch('액션명', payload)] 로 호출한다.
+
+4. getter
+- Vue 컴포넌트에서의 computed처럼 계산된 값을 return 하는 속성이다.
+- state(상태)에 대한 연산을 하고 그 결과를 view에 바인딩이 가능하다.
+- state(상태)가 변경되면, view에 업데이트 되어 반영된다.
+
+----------------------------------------------------------------------------------------------------
+
+1. Vuex refresh(새로고침) 문제점
+- Vuex에는 가장 큰 문제점이 있다. 새로고침 시, store들의 상태들이 기본 값으로 초기화된다.
+이를 방지하기 위해 vuex-persistedstate 라는 npm이 존재하고,
+Vuex에 저장되는 값들을 웹 브라우저의 localstorage에 저장하며, 새로고침시 그 값이 존재하면 localstorage의 값을 가져와 사용되는 원리이다.
+
+// 설치 : npm install --save vuex-persistedstate
+// 주소 : npmjs.com/package/vuex-persistedstate
+// 활용 : 
+import { createStore } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+
+const store = createStore({
+  // ...
+  plugin: [createPersistedState()]
+})
+
+- 모든 store 값들이 모두 localstorage에 저장되어, 가벼운 웹일 경우는 상관없지만, 사용량이 많아지면 속도에 큰 지장이 있다.
+이를 해결할 방법으로는 vuex-persistedstate의 원하는 값만 store에 저장시킬 수 있는 옵션이 존재한다.
+
+'path' 라는 옵션을 통해 배열 안에 넣는 store만 localstorage에 저장된다.
+( 이외에도 vuex-persistedstate 에서는 js-cookie, secure-ls를 이용하여 localstorage 말고도, cookie에 저장하는 방식과
+암호화된 방식으로 데이터를 저장하는 방법을 알려주고 있으니 관심있으면 npm에 접속을 추천한다. )
