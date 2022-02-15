@@ -132,3 +132,5 @@ actions: {
     context.commit('increment');
   }
 }
+
+Vuex 구조상 actions의 api data를 바로 state에 전달이 불가능하고, mutations를 통하여 state에 전달이 가능하다.
