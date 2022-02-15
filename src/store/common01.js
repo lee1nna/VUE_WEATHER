@@ -13,22 +13,6 @@ export default {
     humidity: {},
     windSpeed: {},
     time: {},
-    subData: [
-      {
-        title: '날씨',
-        value: '',
-      },
-      {
-        title: '습도',
-        value: '',
-      },
-      {
-        title: '풍속',
-        value: '',
-      },
-    ],
-    // timeleyWeather: [],
-    images: [],
   },
   // getters : 계산된 상태를 만들어내는 속성, computed와 유사하다.
   // 실제 데이터를 계산된 형태로 바꾸어 새롭게 활용할 수 있다.
@@ -50,6 +34,9 @@ export default {
     },
     SET_DATA03(state, payload) {
       state.humidity = payload;
+    },
+    SET_DATA04(state, payload) {
+      state.windSpeed = payload;
     },
   },
   // 2. actions :특정한 데이터를 직접적으로 수정하는 것이 허용되지 않는다.
@@ -82,6 +69,7 @@ export default {
           context.commit('SET_DATA01', res.data.name);
           context.commit('SET_DATA02', res.data.main.temp);
           context.commit('SET_DATA03', res.data.main.humidity);
+          context.commit('SET_DATA04', res.data.wind.speed);
 
           // this.state.cityName = res.data.name;
           // this.state.totalData = res.data;

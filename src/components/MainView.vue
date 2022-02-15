@@ -14,8 +14,8 @@
           <p>{{ Math.round(this.$store.state.COMMON_01.temp) }}&deg;</p>
         </div>
         <div class="weatherIcon">
-          <img src="~/assets/43.png" alt="" />
-          <!-- <img :src="images[0]" alt="" /> -->
+          <!-- <img src="~/assets/43.png" alt="" /> -->
+          <img :src="this.$store.state.COMMON_02.images[0]" alt="" />
         </div>
         <div class="weatherData">
           <div v-for="subDataValue in subData" :key="subDataValue" class="detailData">
@@ -31,9 +31,9 @@
         <p>이번주 날씨 보기</p>
       </div>
       <ul class="timelyWeatherBox">
-        <li class="timelyWeather" v-for="(weather, index) in timeleyWeather" :key="index">
+        <li class="timelyWeather" v-for="(weather, index) in this.$store.state.COMMON_02.timelyWeather" :key="index">
           <div class="icon">
-            <img :src="images[index]" alt="MainWeatherIcon" />
+            <img :src="this.$store.state.COMMON_02.images[index]" alt="MainWeatherIcon" />
           </div>
           <div class="data">
             <p class="time">
@@ -42,7 +42,7 @@
             <p class="currentDegree">{{ Math.round(weather.temp) }}&deg;</p>
             <div>
               <img src="~/assets/drop.png" alt="" />
-              <p class="fall">{{ this.$store.state.COMMON_01.humidity }}%</p>
+              <p class="fall">{{ weather.humidity }}%</p>
             </div>
           </div>
         </li>
@@ -59,12 +59,29 @@
 
   export default {
     components: { CityNameBox, NavUnderBar },
-
+    data() {
+      return {
+        subData: [
+          {
+            title: '날씨',
+            value: '',
+          },
+          {
+            title: '습도',
+            value: this.$store.state.COMMON_01.humidity + '%',
+          },
+          {
+            title: '풍속',
+            value: Math.round(this.$store.state.COMMON_01.windSpeed) + 'm/s',
+          },
+        ],
+      };
+    },
     created() {
       // Store의 Mutations를 실행할 때는, .commit() 메서드를
       // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
       this.$store.dispatch('COMMON_01/GET_DATA');
-      this.$store.dispatch('COMMON_02/GET_DATA');
+      // this.$store.dispatch('COMMON_02/GET_DATA');
     },
     methods: {
       // 타임스탬프로 변환
