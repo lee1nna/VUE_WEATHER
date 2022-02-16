@@ -18,9 +18,9 @@
           <img :src="this.$store.state.COMMON_01.image" alt="" />
         </div>
         <div class="weatherData">
-          <div v-for="subDataValue in subData" :key="subDataValue" class="detailData">
-            <p>{{ subDataValue.title }}</p>
-            <p>{{ subDataValue.value }}</p>
+          <div v-for="dataList in subData" :key="dataList" class="detailData">
+            <p>{{ dataList.title }}</p>
+            <p>{{ dataList.value }}</p>
           </div>
         </div>
       </div>
@@ -68,11 +68,11 @@
           },
           {
             title: '습도',
-            value: this.$store.state.COMMON_01.humidity + '%',
+            value: '',
           },
           {
             title: '풍속',
-            value: Math.round(this.$store.state.COMMON_01.windSpeed) + 'm/s',
+            value: '',
           },
         ],
       };
@@ -82,6 +82,9 @@
       // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
       this.$store.dispatch('COMMON_01/GET_DATA');
       // this.$store.dispatch('COMMON_02/GET_DATA');
+      this.subData[0].value = this.$store.state.COMMON_01.description;
+      this.subData[1].value = this.$store.state.COMMON_01.humidity + '%';
+      this.subData[2].value = this.$store.state.COMMON_01.windSpeed + 'm/s';
     },
     methods: {
       // 타임스탬프로 변환
