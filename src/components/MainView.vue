@@ -18,7 +18,7 @@
           <img :src="this.$store.state.COMMON_01.image" alt="" />
         </div>
         <div class="weatherData">
-          <div v-for="dataList in subData" :key="dataList" class="detailData">
+          <div v-for="dataList in this.$store.state.COMMON_01.subData" :key="dataList" class="detailData">
             <p>{{ dataList.title }}</p>
             <p>{{ dataList.value }}</p>
           </div>
@@ -59,32 +59,12 @@
 
   export default {
     components: { CityNameBox, NavUnderBar },
-    data() {
-      return {
-        subData: [
-          {
-            title: '날씨',
-            value: '',
-          },
-          {
-            title: '습도',
-            value: '',
-          },
-          {
-            title: '풍속',
-            value: '',
-          },
-        ],
-      };
-    },
+
     created() {
       // Store의 Mutations를 실행할 때는, .commit() 메서드를
       // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
       this.$store.dispatch('COMMON_01/GET_DATA');
       // this.$store.dispatch('COMMON_02/GET_DATA');
-      this.subData[0].value = this.$store.state.COMMON_01.description;
-      this.subData[1].value = this.$store.state.COMMON_01.humidity + '%';
-      this.subData[2].value = this.$store.state.COMMON_01.windSpeed + 'm/s';
     },
     methods: {
       // 타임스탬프로 변환

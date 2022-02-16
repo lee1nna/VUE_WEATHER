@@ -14,6 +14,20 @@ export default {
     windSpeed: '',
     description: '',
     image: '',
+    subData: [
+      {
+        title: '날씨',
+        value: '',
+      },
+      {
+        title: '습도',
+        value: '',
+      },
+      {
+        title: '풍속',
+        value: '',
+      },
+    ],
   },
   // getters : 계산된 상태를 만들어내는 속성, computed와 유사하다.
   // 실제 데이터를 계산된 형태로 바꾸어 새롭게 활용할 수 있다.
@@ -34,14 +48,16 @@ export default {
       state.temp = payload;
     },
     SET_DATA03(state, payload) {
-      state.humidity = payload;
+      state.subData[0].value = payload[0];
+      state.subData[1].value = payload[1] + '%';
+      state.subData[2].value = Math.round(payload[2]) + 'm/s';
     },
-    SET_DATA04(state, payload) {
-      state.windSpeed = payload;
-    },
-    SET_DATA05(state, payload) {
-      state.description = payload;
-    },
+    // SET_DATA04(state, payload) {
+    //   state.windSpeed = payload;
+    // },
+    // SET_DATA05(state, payload) {
+    //   state.description = payload;
+    // },
     SET_DATA06(state, payload) {
       state.image = payload;
     },
@@ -77,9 +93,9 @@ export default {
           // mutations SET_DATA01에 res.data(인자)를 넘김
           context.commit('SET_DATA01', res.data.name);
           context.commit('SET_DATA02', res.data.main.temp);
-          context.commit('SET_DATA03', res.data.main.humidity);
-          context.commit('SET_DATA04', res.data.wind.speed);
-          context.commit('SET_DATA05', res.data.weather[0].description);
+          context.commit('SET_DATA03', [res.data.weather[0].description, res.data.main.humidity, res.data.wind.speed]);
+          // context.commit('SET_DATA04', res.data.wind.speed);
+          // context.commit('SET_DATA05', res.data.weather[0].description);
 
           console.log(res.data.weather[0].description);
           var img = res.data.weather[0].icon; // '01d'
