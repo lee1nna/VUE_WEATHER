@@ -13,6 +13,7 @@ export default {
     humidity: {},
     windSpeed: {},
     time: {},
+    image: {},
   },
   // getters : 계산된 상태를 만들어내는 속성, computed와 유사하다.
   // 실제 데이터를 계산된 형태로 바꾸어 새롭게 활용할 수 있다.
@@ -37,6 +38,9 @@ export default {
     },
     SET_DATA04(state, payload) {
       state.windSpeed = payload;
+    },
+    SET_DATA05(state, payload) {
+      state.image = payload;
     },
   },
   // 2. actions :특정한 데이터를 직접적으로 수정하는 것이 허용되지 않는다.
@@ -71,18 +75,81 @@ export default {
           context.commit('SET_DATA03', res.data.main.humidity);
           context.commit('SET_DATA04', res.data.wind.speed);
 
-          // this.state.cityName = res.data.name;
-          // this.state.totalData = res.data;
-          // this.state.temp = res.data.main.temp;
-          // this.state.time = res.data.dt;
+          var img = res.data.weather[0].icon; // '01d'
+          context.commit('SET_DATA05', `http://openweathermap.org/img/wn/${img}@2x.png`);
 
-          // this.state.description = res.data.weather[0].description;
-          // this.state.humidity = res.data.main.humidity;
-          // this.state.windSpeed = res.data.wind.speed;
-
-          // this.state.subData[0].value = this.description;
-          // this.state.subData[1].value = this.humidity + '%';
-          // this.state.subData[2].value = Math.round(this.windSpeed) + 'm/s';
+          if (img == '01d') {
+            context.commit('SET_DATA05', 'src/assets/26.png');
+            // this.images[i] = 'src/assets/26.png';
+          }
+          if (img == '01n') {
+            context.commit('SET_DATA05', 'src/assets/10.png');
+            // this.images[i] = 'src/assets/10.png';
+          }
+          if (img == '02d') {
+            context.commit('SET_DATA05', 'src/assets/27.png');
+            // this.images[i] = 'src/assets/27.png';
+          }
+          if (img == '02n') {
+            context.commit('SET_DATA05', 'src/assets/31.png');
+            // this.images[i] = 'src/assets/31.png';
+          }
+          if (img == '03d') {
+            context.commit('SET_DATA05', 'src/assets/33.png');
+            // this.images[i] = 'src/assets/33.png';
+          }
+          if (img == '03n') {
+            context.commit('SET_DATA05', 'src/assets/32.png');
+            // this.images[i] = 'src/assets/32.png';
+          }
+          if (img == '04d') {
+            context.commit('SET_DATA05', 'src/assets/35.png');
+            // this.images[i] = 'src/assets/35.png';
+          }
+          if (img == '04n') {
+            context.commit('SET_DATA05', 'src/assets/35.png');
+            // this.images[i] = 'src/assets/35.png';
+          }
+          if (img == '09d') {
+            context.commit('SET_DATA05', 'src/assets/5.png');
+            // this.images[i] = 'src/assets/5.png';
+          }
+          if (img == '09n') {
+            context.commit('SET_DATA05', 'src/assets/5.png');
+            // this.images[i] = 'src/assets/5.png';
+          }
+          if (img == '10d') {
+            context.commit('SET_DATA05', 'src/assets/8.png');
+            // this.images[i] = 'src/assets/8.png';
+          }
+          if (img == '10n') {
+            context.commit('SET_DATA05', 'src/assets/1.png');
+            // this.images[i] = 'src/assets/1.png';
+          }
+          if (img == '11d') {
+            context.commit('SET_DATA05', 'src/assets/17.png');
+            // this.images[i] = 'src/assets/17.png';
+          }
+          if (img == '11n') {
+            context.commit('SET_DATA05', 'src/assets/17.png');
+            // this.images[i] = 'src/assets/17.png';
+          }
+          if (img == '13d') {
+            context.commit('SET_DATA05', 'src/assets/18.png');
+            // this.images[i] = 'src/assets/18.png';
+          }
+          if (img == '13n') {
+            context.commit('SET_DATA05', 'src/assets/18.png');
+            // this.images[i] = 'src/assets/18.png';
+          }
+          if (img == '50d') {
+            context.commit('SET_DATA05', 'src/assets/6.png');
+            // this.images[i] = 'src/assets/6.png';
+          }
+          if (img == '50n') {
+            context.commit('SET_DATA05', 'src/assets/9.png');
+            // this.images[i] = 'src/assets/9.png';
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -90,3 +157,16 @@ export default {
     },
   },
 };
+
+// this.state.cityName = res.data.name;
+// this.state.totalData = res.data;
+// this.state.temp = res.data.main.temp;
+// this.state.time = res.data.dt;
+
+// this.state.description = res.data.weather[0].description;
+// this.state.humidity = res.data.main.humidity;
+// this.state.windSpeed = res.data.wind.speed;
+
+// this.state.subData[0].value = this.description;
+// this.state.subData[1].value = this.humidity + '%';
+// this.state.subData[2].value = Math.round(this.windSpeed) + 'm/s';

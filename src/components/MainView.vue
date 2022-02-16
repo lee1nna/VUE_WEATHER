@@ -15,7 +15,7 @@
         </div>
         <div class="weatherIcon">
           <!-- <img src="~/assets/43.png" alt="" /> -->
-          <img :src="this.$store.state.COMMON_02.images[0]" alt="" />
+          <img :src="this.$store.state.COMMON_01.image" alt="" />
         </div>
         <div class="weatherData">
           <div v-for="subDataValue in subData" :key="subDataValue" class="detailData">
@@ -31,7 +31,7 @@
         <p>이번주 날씨 보기</p>
       </div>
       <ul class="timelyWeatherBox">
-        <li class="timelyWeather" v-for="(weather, index) in this.$store.state.COMMON_02.timelyWeather" :key="index">
+        <li class="timelyWeather" v-for="(weather, index) in weathers" :key="index">
           <div class="icon">
             <img :src="this.$store.state.COMMON_02.images[index]" alt="MainWeatherIcon" />
           </div>
