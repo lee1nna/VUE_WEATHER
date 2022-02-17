@@ -31,18 +31,18 @@
         <p>이번주 날씨 보기</p>
       </div>
       <ul class="timelyWeatherBox">
-        <li class="timelyWeather" v-for="dataList2 in this.$store.state.COMMON_02.timelyWeather" :key="dataList2">
+        <li class="timelyWeather" v-for="weather in this.$store.state.COMMON_02.timelyWeather" :key="weather">
           <div class="icon">
-            <img :src="this.$store.state.COMMON_02.images" alt="" />
+            <img :src="this.$store.state.COMMON_02.images.img" alt="" />
           </div>
           <div class="data">
             <p class="time">
-              {{ Unix_timestamp(dataList.dt) }}
+              {{ Unix_timestamp(weather.dt) }}
             </p>
-            <p class="currentDegree">{{ Math.round(dataList.temp) }}&deg;</p>
+            <p class="currentDegree">{{ Math.round(weather.temp) }}&deg;</p>
             <div>
               <img src="~/assets/drop.png" alt="" />
-              <p class="fall">{{ dataList.humidity }}%</p>
+              <p class="fall">{{ weather.humidity }}%</p>
             </div>
           </div>
         </li>

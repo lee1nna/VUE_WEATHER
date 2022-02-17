@@ -6,16 +6,28 @@ export default {
   namespaced: true,
   // state : 실제로 취급해야하는 데이터
   state: {
-    timelyWeather: [],
-    images: [],
+    timelyWeather: [
+      {
+        dt: '',
+        temp: '',
+        humidity: '',
+      },
+    ],
+    images: [{ img: '' }],
   },
   getters: {},
-  mutaions: {
+  mutations: {
     SET_DATA01(state, payload) {
-      state.timelyWeather = payload;
+      for (let i = 0; i < 24; i++) {
+        state.timelyWeather[i].dt = payload[i].dt;
+        state.timelyWeather[i].temp = payload[i].temp;
+        state.timelyWeather[i].humidity = payload[i].humidity;
+      }
     },
     SET_DATA02(state, payload) {
-      state.images = payload;
+      for (let i = 0; i < 24; i++) {
+        state.images[i].img = payload[i];
+      }
     },
   },
   actions: {
@@ -36,12 +48,13 @@ export default {
         .get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY2}&units=metric`)
         .then((res) => {
           console.log(res.data);
+          console.log(res.data.hourly);
 
           for (let i = 0; i < 24; i++) {
-            context.commit('SET_DATA01', res.data.hourly[i], { root: true });
+            context.commit('SET_DATA01', [res.data.hourly[i]]);
 
             var img = res.data.hourly[i].weather[0].icon; // '01d'
-            context.commit('SET_DATA02', `http://openweathermap.org/img/wn/${img}@2x.png`, { root: true });
+            context.commit('SET_DATA02', [`http://openweathermap.org/img/wn/${img}@2x.png`]);
           }
         })
         .catch((error) => {
