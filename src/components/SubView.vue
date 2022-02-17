@@ -4,33 +4,32 @@
     <div id="contentsBox">
       <div class="buttonBox">
         <div class="buttonBackground">
-          <button class="forecast">
-            Forecast
-          </button>
-          <button class="airquality">
-            Air Quality
-          </button>
+          <button class="forecast">Forecast</button>
+          <button class="airquality">Air Quality</button>
         </div>
       </div>
       <div class="weatherBox">
         <div class="airCondition">
-          <p>매우 나쁨</p>
+          <!-- 영하 / 영상 나누기 -->
+          <p v-if="this.$store.state.COMMON_01.subData2[2].value > 30">매우 더움</p>
+          <p v-else-if="this.$store.state.COMMON_01.subData2[2].value > 25">더움</p>
+          <p v-else-if="this.$store.state.COMMON_01.subData2[2].value > 20">시원함</p>
+          <p v-else-if="this.$store.state.COMMON_01.subData2[2].value > 15">선선함</p>
+          <p v-else-if="this.$store.state.COMMON_01.subData2[2].value > 0">추움</p>
+          <p v-else>매우 추움</p>
         </div>
         <div class="detail">
           <div class="title">
-            <p>오염물질</p>
+            <p>Detail Temperatures</p>
           </div>
-          <div
-            v-for="airCondition in airConditions"
-            :key="airCondition"
-            class="data">
+          <div v-for="detailData in this.$store.state.COMMON_01.subData2" :key="detailData" class="data">
             <div class="dataName">
               <p></p>
-              <p>{{ airCondition.air }}</p>
+              <p>{{ detailData.title }}</p>
             </div>
             <div class="dataValue">
               <p>
-                <span>{{ airCondition.value }}</span> &#181;g/m&#179;
+                <span>{{ Math.round(detailData.value) }}</span> &deg;
               </p>
             </div>
           </div>
@@ -49,23 +48,9 @@
 
   export default {
     components: { CityNameBox, NavUnderBar, Map },
-    data() {
-      return {
-        airConditions: [
-          {
-            air: '초미세먼지',
-            value: 65,
-          },
-          {
-            air: '미세먼지',
-            value: 74,
-          },
-          {
-            air: '오존',
-            value: 16,
-          },
-        ],
-      };
+
+    created() {
+      this.$store.dispatch('COMMON_01/GET_DATA');
     },
   };
 </script>
