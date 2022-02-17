@@ -86,7 +86,7 @@ export default {
           context.commit('SET_DATA02', res.data.main.temp);
           context.commit('SET_DATA03', [res.data.weather[0].description, res.data.main.humidity, res.data.wind.speed]);
 
-          console.log(res.data.weather[0].description);
+          // console.log(res.data.weather[0].description);
           var img = res.data.weather[0].icon; // '01d'
           context.commit('SET_DATA04', `http://openweathermap.org/img/wn/${img}@2x.png`);
 
@@ -169,16 +169,3 @@ export default {
     },
   },
 };
-
-// this.state.cityName = res.data.name;
-// this.state.totalData = res.data;
-// this.state.temp = res.data.main.temp;
-// this.state.time = res.data.dt;
-
-// this.state.description = res.data.weather[0].description;
-// this.state.humidity = res.data.main.humidity;
-// this.state.windSpeed = res.data.wind.speed;
-
-// this.state.subData[0].value = this.description;
-// this.state.subData[1].value = this.humidity + '%';
-// this.state.subData[2].value = Math.round(this.windSpeed) + 'm/s';

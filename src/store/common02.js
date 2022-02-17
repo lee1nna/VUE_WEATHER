@@ -11,10 +11,10 @@ export default {
   },
   getters: {},
   mutaions: {
-    SET_DATA03(state, payload) {
+    SET_DATA01(state, payload) {
       state.timelyWeather = payload;
     },
-    SET_DATA04(state, payload) {
+    SET_DATA02(state, payload) {
       state.images = payload;
     },
   },
@@ -35,16 +35,13 @@ export default {
       axios
         .get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY2}&units=metric`)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
 
           for (let i = 0; i < 24; i++) {
-            context.commit('SET_DATA03', res.data.hourly[i]);
+            context.commit('SET_DATA01', res.data.hourly[i], { root: true });
 
             var img = res.data.hourly[i].weather[0].icon; // '01d'
-            context.commit('SET_DATA04', `http://openweathermap.org/img/wn/${img}@2x.png`);
-
-            // this.timeleyWeather[i] = response.data.hourly[i];
-            // this.images[i] = `http://openweathermap.org/img/wn/${img}@2x.png`;
+            context.commit('SET_DATA02', `http://openweathermap.org/img/wn/${img}@2x.png`, { root: true });
           }
         })
         .catch((error) => {
