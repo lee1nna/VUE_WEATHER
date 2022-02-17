@@ -4,8 +4,12 @@
     <div id="contentsBox">
       <div class="buttonBox">
         <div class="buttonBackground">
-          <button class="forecast">Forecast</button>
-          <button class="airquality">Air Quality</button>
+          <button class="forecast">
+            Forecast
+          </button>
+          <button class="airquality">
+            Air Quality
+          </button>
         </div>
       </div>
       <div class="weatherBox">
@@ -16,7 +20,10 @@
           <div class="title">
             <p>오염물질</p>
           </div>
-          <div v-for="airCondition in airConditions" :key="airCondition" class="data">
+          <div
+            v-for="airCondition in airConditions"
+            :key="airCondition"
+            class="data">
             <div class="dataName">
               <p></p>
               <p>{{ airCondition.air }}</p>

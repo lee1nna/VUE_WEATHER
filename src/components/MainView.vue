@@ -31,18 +31,18 @@
         <p>이번주 날씨 보기</p>
       </div>
       <ul class="timelyWeatherBox">
-        <li class="timelyWeather" v-for="weather in this.$store.state.COMMON_02.timelyWeather" :key="weather">
+        <li class="timelyWeather" v-for="dataList in this.$store.state.COMMON_02.weather" :key="dataList">
           <div class="icon">
-            <img :src="this.$store.state.COMMON_02.images.img" alt="" />
+            <img :src="this.$store.state.COMMON_02.images" alt="" />
           </div>
           <div class="data">
             <p class="time">
-              {{ Unix_timestamp(weather.dt) }}
+              {{ Unix_timestamp(dataList.dt) }}
             </p>
-            <p class="currentDegree">{{ Math.round(weather.temp) }}&deg;</p>
+            <p class="currentDegree">{{ Math.round(dataList.temp) }}&deg;</p>
             <div>
               <img src="~/assets/drop.png" alt="" />
-              <p class="fall">{{ weather.humidity }}%</p>
+              <p class="fall">{{ dataList.humidity }}%</p>
             </div>
           </div>
         </li>
@@ -68,8 +68,8 @@
     },
     methods: {
       // 타임스탬프로 변환
-      Unix_timestamp(t) {
-        var date = new Date(t * 1000);
+      Unix_timestamp(dt) {
+        var date = new Date(dt * 1000);
         var hour = '0' + date.getHours();
         return hour.substr(-2) + '시';
       },

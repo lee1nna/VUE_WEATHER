@@ -6,28 +6,19 @@ export default {
   namespaced: true,
   // state : 실제로 취급해야하는 데이터
   state: {
-    timelyWeather: [
-      {
-        dt: '',
-        temp: '',
-        humidity: '',
-      },
-    ],
-    images: [{ img: '' }],
+    weather: [],
+    images: [],
   },
   getters: {},
   mutations: {
-    SET_DATA01(state, payload) {
+    SET_DATA03(state, payload) {
       for (let i = 0; i < 24; i++) {
-        state.timelyWeather[i].dt = payload[i].dt;
-        state.timelyWeather[i].temp = payload[i].temp;
-        state.timelyWeather[i].humidity = payload[i].humidity;
+        state.weather[i] = payload[i];
       }
     },
-    SET_DATA02(state, payload) {
-      for (let i = 0; i < 24; i++) {
-        state.images[i].img = payload[i];
-      }
+    SET_DATA04(state, payload) {
+      let img = [payload];
+      state.images = [img];
     },
   },
   actions: {
@@ -48,13 +39,67 @@ export default {
         .get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY2}&units=metric`)
         .then((res) => {
           console.log(res.data);
-          console.log(res.data.hourly);
+          // console.log(res.data.hourly);
+          context.commit('COMMON_02/SET_DATA03', res.data.hourly, { root: true });
 
           for (let i = 0; i < 24; i++) {
-            context.commit('SET_DATA01', [res.data.hourly[i]]);
-
             var img = res.data.hourly[i].weather[0].icon; // '01d'
-            context.commit('SET_DATA02', [`http://openweathermap.org/img/wn/${img}@2x.png`]);
+            // context.commit('COMMON_02/SET_DATA04', `http://openweathermap.org/img/wn/${img}@2x.png`, { root: true });
+
+            if (img == '01d') {
+              context.commit('SET_DATA04', 'src/assets/26.png');
+            }
+            if (img == '01n') {
+              context.commit('SET_DATA04', 'src/assets/10.png');
+            }
+            if (img == '04d') {
+              context.commit('SET_DATA04', 'src/assets/27.png');
+            }
+            if (img == '04n') {
+              context.commit('SET_DATA04', 'src/assets/31.png');
+            }
+            if (img == '03d') {
+              context.commit('SET_DATA04', 'src/assets/33.png');
+            }
+            if (img == '03n') {
+              context.commit('SET_DATA04', 'src/assets/32.png');
+            }
+            if (img == '04d') {
+              context.commit('SET_DATA04', 'src/assets/35.png');
+            }
+            if (img == '04n') {
+              context.commit('SET_DATA04', 'src/assets/35.png');
+            }
+            if (img == '09d') {
+              context.commit('SET_DATA04', 'src/assets/5.png');
+            }
+            if (img == '09n') {
+              context.commit('SET_DATA04', 'src/assets/5.png');
+            }
+            if (img == '10d') {
+              context.commit('SET_DATA04', 'src/assets/8.png');
+            }
+            if (img == '10n') {
+              context.commit('SET_DATA04', 'src/assets/1.png');
+            }
+            if (img == '11d') {
+              context.commit('SET_DATA04', 'src/assets/17.png');
+            }
+            if (img == '11n') {
+              context.commit('SET_DATA04', 'src/assets/17.png');
+            }
+            if (img == '13d') {
+              context.commit('SET_DATA04', 'src/assets/18.png');
+            }
+            if (img == '13n') {
+              context.commit('SET_DATA04', 'src/assets/18.png');
+            }
+            if (img == '50d') {
+              context.commit('SET_DATA04', 'src/assets/6.png');
+            }
+            if (img == '50n') {
+              context.commit('SET_DATA04', 'src/assets/9.png');
+            }
           }
         })
         .catch((error) => {
