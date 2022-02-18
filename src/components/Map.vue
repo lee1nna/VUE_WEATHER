@@ -7,7 +7,10 @@
 <script>
   export default {
     data() {
-      return {};
+      return {
+        markerLon: '',
+        markerLat: '',
+      };
     },
     mounted() {
       if (window.kakao && window.kakao.maps) {

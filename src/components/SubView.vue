@@ -44,7 +44,7 @@
 <script>
   import CityNameBox from './common/CityNameBox.vue';
   import NavUnderBar from './common/NavUnderBar.vue';
-  import Map from './common/Map.vue';
+  import Map from './Map.vue';
 
   export default {
     components: { CityNameBox, NavUnderBar, Map },
