@@ -8,8 +8,8 @@
   export default {
     data() {
       return {
-        markerLon: '',
         markerLat: '',
+        markerLon: '',
       };
     },
     mounted() {
@@ -94,12 +94,14 @@
           });
           // 마커가 지도 위에 표시되도록 설정합니다.
           marker.setMap(map);
-          //마커 클릭 이벤트를 등록합니다.
+          // 마커 클릭 이벤트를 등록합니다.
           kakao.maps.event.addListener(marker, 'click', () => {
-            //마커 position을 출력합니다.
+            // 마커 position을 출력합니다.
             // console.log(marker.getPosition());
-            vm.markerLon = marker.getPosition().La;
-            vm.markerLat = marker.getPosition().Ma;
+            vm.$store.COMMON_01.changedData.lat = marker.getPosition().La;
+            vm.$store.COMMON_01.changedData.lon = marker.getPosition().Ma;
+            // vm.markerLat = marker.getPosition().La;
+            // vm.markerLon = marker.getPosition().Ma;
             // console.log(vm.markerLat);
             // console.log(vm.markerLon);
             return marker;

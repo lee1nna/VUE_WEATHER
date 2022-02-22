@@ -233,7 +233,7 @@ export default {
     // searchData({ state, getters, commit }, payload) {},
     // 두 번째 매개변수 자리 (payload): 함수가 실행될 때, 인수로 들어온 특정한 데이터를 payload 자리에 받는다.
 
-    GET_DATA(context) {
+    CHANGED_DATA(context) {
       // context : 매개변수 전달
       const API_KEY = 'bf55a4cfb052a4396983999d7b9a9e6d';
       var CITY_NAME = 'Seoul';
