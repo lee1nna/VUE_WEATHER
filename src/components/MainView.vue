@@ -1,6 +1,6 @@
 <template>
   <div class="leftContainer">
-    <CityNameBox :city-name="cityName" />
+    <CityNameBox :cityName="cityName" />
     <div id="contentsBox">
       <div class="buttonBox">
         <div class="buttonBackground">
@@ -59,7 +59,11 @@
 
   export default {
     components: { CityNameBox, NavUnderBar },
-
+    data() {
+      return {
+        cityName: this.$store.state.COMMON_01.cityName,
+      };
+    },
     created() {
       // Store의 Mutations를 실행할 때는, .commit() 메서드를
       // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
@@ -68,7 +72,7 @@
       this.$store.dispatch('COMMON_02/GET_DATA');
     },
     watch() {
-      // this.$store.dispatch('COMMON_04/CHANGED_DATA');
+      this.$store.dispatch('COMMON_01/SET_CHANGEDATA');
     },
     methods: {
       // 타임스탬프로 변환

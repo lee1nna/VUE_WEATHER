@@ -1,6 +1,10 @@
 // city weather api - store
 import axios from 'axios';
 
+const SET_DATA05 = 'SET_DATA05';
+const exceptImg = {
+  13: 18,
+};
 const changedCityDataHandle = (context) => {
   // context : 매개변수 전달
   const API_KEY = 'bf55a4cfb052a4396983999d7b9a9e6d';
@@ -8,55 +12,43 @@ const changedCityDataHandle = (context) => {
 
   console.log('changedData', context.state.changedData);
   // Contents Details
-  // if (context.state.changedData.lat == 37.566826 && context.state.changedData.lon == 126.9786567) {
-  //   CITY_NAME = 'Seoul';
-  // }
-  if (context.state.changedData.lon == 37.40864282648822 && context.state.changedData.lat == 126.65071862847725) {
-    console.log(1);
+  if (context.state.changedData.lat == 37.566826 && context.state.changedData.lon == 126.9786567) {
+    CITY_NAME = 'Seoul';
+  }
+  if (context.state.changedData.lon == 37.40864282648821 && context.state.changedData.lat == 126.65071862847725) {
     CITY_NAME = 'Incheon';
   }
   if (context.state.changedData.lon == 37.2911 && context.state.changedData.lat == 127.00889999999998) {
-    console.log(2);
     CITY_NAME = 'Suwon';
   }
   if (context.state.changedData.lon == 37.791688035246636 && context.state.changedData.lat == 128.82867301427635) {
-    console.log(3);
     CITY_NAME = 'gangneung';
   }
-  if (context.state.changedData.lon == 37.15818414766273 && context.state.changedData.lat == 128.928560966107) {
-    console.log(4);
+  if (context.state.changedData.lon == 37.15818414766273 && context.state.changedData.lat == 128.9285609661078) {
     CITY_NAME = 'Taebaek';
   }
   if (context.state.changedData.lon == 36.3519957815787 && context.state.changedData.lat == 127.39131469478555) {
-    console.log(5);
     CITY_NAME = 'Daejeon';
   }
   if (context.state.changedData.lon == 35.90493196781132 && context.state.changedData.lat == 127.17357575637105) {
-    console.log(6);
     CITY_NAME = 'Jeonju';
   }
   if (context.state.changedData.lon == 35.166611792579545 && context.state.changedData.lat == 126.84603104436039) {
-    console.log(7);
     CITY_NAME = 'Gwangju';
   }
-  if (context.state.changedData.lon == 35.823630139082525 && context.state.changedData.lat == 126.39766650967137) {
-    console.log(8);
+  if (context.state.changedData.lon == 34.823630139082525 && context.state.changedData.lat == 126.39766650967137) {
     CITY_NAME = 'Mokpo';
   }
   if (context.state.changedData.lon == 35.871148697228875 && context.state.changedData.lat == 128.61345034272642) {
-    console.log(9);
     CITY_NAME = 'Daegu';
   }
-  if (context.state.changedData.lon == 35.5372 && context.state.changedData.lat == 129.316700000003) {
-    console.log(10);
+  if (context.state.changedData.lon == 35.537200000000006 && context.state.changedData.lat == 129.316700000003) {
     CITY_NAME = 'Ulsan';
   }
-  if (context.state.changedData.lon == 35.185997613083536 && context.state.changedData.lat == 129.0662809358643) {
-    console.log(11);
+  if (context.state.changedData.lon == 35.185997613083536 && context.state.changedData.lat == 129.0662809358657) {
     CITY_NAME = 'Busan';
   }
   if (context.state.changedData.lon == 33.509699999999995 && context.state.changedData.lat == 126.5219) {
-    console.log(12);
     CITY_NAME = 'Jeju';
   }
 
@@ -75,87 +67,16 @@ const changedCityDataHandle = (context) => {
       context.commit('SET_DATA04', [res.data.main.temp_max, res.data.main.temp_min, res.data.main.feels_like]);
 
       // console.log(res.data.weather[0].description);
-      var img = res.data.weather[0].icon; // '01d'
-      context.commit('SET_DATA05', `http://openweathermap.org/img/wn/${img}@2x.png`);
+      var imgIcon = res.data.weather[0].icon; // '01d'
 
-      if (img == '01d') {
-        context.commit('SET_DATA05', 'src/assets/26.png');
-        // this.images[i] = 'src/assets/26.png';
-      }
-      if (img == '01n') {
-        context.commit('SET_DATA05', 'src/assets/10.png');
-        // this.images[i] = 'src/assets/10.png';
-      }
-      if (img == '02d') {
-        context.commit('SET_DATA05', 'src/assets/27.png');
-        // this.images[i] = 'src/assets/27.png';
-      }
-      if (img == '02n') {
-        context.commit('SET_DATA05', 'src/assets/31.png');
-        // this.images[i] = 'src/assets/31.png';
-      }
-      if (img == '03d') {
-        context.commit('SET_DATA05', 'src/assets/33.png');
-        // this.images[i] = 'src/assets/33.png';
-      }
-      if (img == '03n') {
-        context.commit('SET_DATA05', 'src/assets/32.png');
-        // this.images[i] = 'src/assets/32.png';
-      }
-      if (img == '04d') {
-        context.commit('SET_DATA5', 'src/assets/35.png');
-      }
-      if (img == '04n') {
-        context.commit('SET_DATA05', 'src/assets/35.png');
-      }
-      if (img == '05d') {
-        context.commit('SET_DATA05', 'src/assets/35.png');
-        // this.images[i] = 'src/assets/35.png';
-      }
-      if (img == '05n') {
-        context.commit('SET_DATA05', 'src/assets/35.png');
-        // this.images[i] = 'src/assets/35.png';
-      }
-      if (img == '09d') {
-        context.commit('SET_DATA05', 'src/assets/5.png');
-        // this.images[i] = 'src/assets/5.png';
-      }
-      if (img == '09n') {
-        context.commit('SET_DATA05', 'src/assets/5.png');
-        // this.images[i] = 'src/assets/5.png';
-      }
-      if (img == '10d') {
-        context.commit('SET_DATA05', 'src/assets/8.png');
-        // this.images[i] = 'src/assets/8.png';
-      }
-      if (img == '10n') {
-        context.commit('SET_DATA05', 'src/assets/1.png');
-        // this.images[i] = 'src/assets/1.png';
-      }
-      if (img == '11d') {
-        context.commit('SET_DATA05', 'src/assets/17.png');
-        // this.images[i] = 'src/assets/17.png';
-      }
-      if (img == '11n') {
-        context.commit('SET_DATA05', 'src/assets/17.png');
-        // this.images[i] = 'src/assets/17.png';
-      }
-      if (img == '13d') {
-        context.commit('SET_DATA05', 'src/assets/18.png');
-        // this.images[i] = 'src/assets/18.png';
-      }
-      if (img == '13n') {
-        context.commit('SET_DATA05', 'src/assets/18.png');
-        // this.images[i] = 'src/assets/18.png';
-      }
-      if (img == '50d') {
-        context.commit('SET_DATA05', 'src/assets/6.png');
-        // this.images[i] = 'src/assets/6.png';
-      }
-      if (img == '50n') {
-        context.commit('SET_DATA05', 'src/assets/9.png');
-        // this.images[i] = 'src/assets/9.png';
-      }
+      Object.keys(exceptImg).map((key) => {
+        const value = exceptImg[key];
+        if (typeof key === 'number') key = String(key);
+        if (typeof img === 'number') imgIcon = String(imgIcon);
+        if (imgIcon && imgIcon.includes(key)) imgIcon = value;
+      });
+
+      context.commit(SET_DATA05, `src/assets/${imgIcon}.png`);
     })
     .catch((error) => {
       console.log(error);
@@ -242,6 +163,7 @@ export default {
     SET_CHANGEDATA(state, payload) {
       state.changedData.lat = payload.La;
       state.changedData.lon = payload.Ma;
+      state.cityName = payload.CITY_NAME;
     },
   },
   // 2. actions :특정한 데이터를 직접적으로 수정하는 것이 허용되지 않는다.
@@ -279,89 +201,98 @@ export default {
           context.commit('SET_DATA04', [res.data.main.temp_max, res.data.main.temp_min, res.data.main.feels_like]);
 
           // console.log(res.data.weather[0].description);
-          var img = res.data.weather[0].icon; // '01d'
-          context.commit('SET_DATA05', `http://openweathermap.org/img/wn/${img}@2x.png`);
+          let imgIcon = res.data.weather[0].icon; // '01d'
+          // context.commit('SET_DATA05', `http://openweathermap.org/img/wn/${img}@2x.png`);
 
-          if (img == '01d') {
-            context.commit('SET_DATA05', 'src/assets/26.png');
-            // this.images[i] = 'src/assets/26.png';
-          }
-          if (img == '01n') {
-            context.commit('SET_DATA05', 'src/assets/10.png');
-            // this.images[i] = 'src/assets/10.png';
-          }
-          if (img == '02d') {
-            context.commit('SET_DATA05', 'src/assets/27.png');
-            // this.images[i] = 'src/assets/27.png';
-          }
-          if (img == '02n') {
-            context.commit('SET_DATA05', 'src/assets/31.png');
-            // this.images[i] = 'src/assets/31.png';
-          }
-          if (img == '03d') {
-            context.commit('SET_DATA05', 'src/assets/33.png');
-            // this.images[i] = 'src/assets/33.png';
-          }
-          if (img == '03n') {
-            context.commit('SET_DATA05', 'src/assets/32.png');
-            // this.images[i] = 'src/assets/32.png';
-          }
-          if (img == '04d') {
-            context.commit('SET_DATA05', 'src/assets/35.png');
-            // this.images[i] = 'src/assets/35.png';
-          }
-          if (img == '04n') {
-            context.commit('SET_DATA05', 'src/assets/35.png');
-            // this.images[i] = 'src/assets/35.png';
-          }
-          if (img == '05d') {
-            context.commit('SET_DATA05', 'src/assets/35.png');
-            // this.images[i] = 'src/assets/35.png';
-          }
-          if (img == '05n') {
-            context.commit('SET_DATA05', 'src/assets/35.png');
-            // this.images[i] = 'src/assets/35.png';
-          }
-          if (img == '09d') {
-            context.commit('SET_DATA05', 'src/assets/5.png');
-            // this.images[i] = 'src/assets/5.png';
-          }
-          if (img == '09n') {
-            context.commit('SET_DATA05', 'src/assets/5.png');
-            // this.images[i] = 'src/assets/5.png';
-          }
-          if (img == '10d') {
-            context.commit('SET_DATA05', 'src/assets/8.png');
-            // this.images[i] = 'src/assets/8.png';
-          }
-          if (img == '10n') {
-            context.commit('SET_DATA05', 'src/assets/1.png');
-            // this.images[i] = 'src/assets/1.png';
-          }
-          if (img == '11d') {
-            context.commit('SET_DATA05', 'src/assets/17.png');
-            // this.images[i] = 'src/assets/17.png';
-          }
-          if (img == '11n') {
-            context.commit('SET_DATA05', 'src/assets/17.png');
-            // this.images[i] = 'src/assets/17.png';
-          }
-          if (img == '13d') {
-            context.commit('SET_DATA05', 'src/assets/18.png');
-            // this.images[i] = 'src/assets/18.png';
-          }
-          if (img == '13n') {
-            context.commit('SET_DATA05', 'src/assets/18.png');
-            // this.images[i] = 'src/assets/18.png';
-          }
-          if (img == '50d') {
-            context.commit('SET_DATA05', 'src/assets/6.png');
-            // this.images[i] = 'src/assets/6.png';
-          }
-          if (img == '50n') {
-            context.commit('SET_DATA05', 'src/assets/9.png');
-            // this.images[i] = 'src/assets/9.png';
-          }
+          Object.keys(exceptImg).map((key) => {
+            const value = exceptImg[key];
+            if (typeof key === 'number') key = String(key);
+            if (typeof img === 'number') imgIcon = String(imgIcon);
+            if (imgIcon && imgIcon.includes(key)) imgIcon = value;
+          });
+
+          context.commit(SET_DATA05, `src/assets/${imgIcon}.png`);
+
+          // if (img == '01d') {
+          //   context.commit('SET_DATA05', 'src/assets/26.png');
+          //   // this.images[i] = 'src/assets/26.png';
+          // }
+          // if (img == '01n') {
+          //   context.commit('SET_DATA05', 'src/assets/10.png');
+          //   // this.images[i] = 'src/assets/10.png';
+          // }
+          // if (img == '02d') {
+          //   context.commit('SET_DATA05', 'src/assets/27.png');
+          //   // this.images[i] = 'src/assets/27.png';
+          // }
+          // if (img == '02n') {
+          //   context.commit('SET_DATA05', 'src/assets/31.png');
+          //   // this.images[i] = 'src/assets/31.png';
+          // }
+          // if (img == '03d') {
+          //   context.commit('SET_DATA05', 'src/assets/33.png');
+          //   // this.images[i] = 'src/assets/33.png';
+          // }
+          // if (img == '03n') {
+          //   context.commit('SET_DATA05', 'src/assets/32.png');
+          //   // this.images[i] = 'src/assets/32.png';
+          // }
+          // if (img == '04d') {
+          //   context.commit('SET_DATA05', 'src/assets/35.png');
+          //   // this.images[i] = 'src/assets/35.png';
+          // }
+          // if (img == '04n') {
+          //   context.commit('SET_DATA05', 'src/assets/35.png');
+          //   // this.images[i] = 'src/assets/35.png';
+          // }
+          // if (img == '05d') {
+          //   context.commit('SET_DATA05', 'src/assets/35.png');
+          //   // this.images[i] = 'src/assets/35.png';
+          // }
+          // if (img == '05n') {
+          //   context.commit('SET_DATA05', 'src/assets/35.png');
+          //   // this.images[i] = 'src/assets/35.png';
+          // }
+          // if (img == '09d') {
+          //   context.commit('SET_DATA05', 'src/assets/5.png');
+          //   // this.images[i] = 'src/assets/5.png';
+          // }
+          // if (img == '09n') {
+          //   context.commit('SET_DATA05', 'src/assets/5.png');
+          //   // this.images[i] = 'src/assets/5.png';
+          // }
+          // if (img == '10d') {
+          //   context.commit('SET_DATA05', 'src/assets/8.png');
+          //   // this.images[i] = 'src/assets/8.png';
+          // }
+          // if (img == '10n') {
+          //   context.commit('SET_DATA05', 'src/assets/1.png');
+          //   // this.images[i] = 'src/assets/1.png';
+          // }
+          // if (img == '11d') {
+          //   context.commit('SET_DATA05', 'src/assets/17.png');
+          //   // this.images[i] = 'src/assets/17.png';
+          // }
+          // if (img == '11n') {
+          //   context.commit('SET_DATA05', 'src/assets/17.png');
+          //   // this.images[i] = 'src/assets/17.png';
+          // }
+          // if (img == '13d') {
+          //   context.commit('SET_DATA05', 'src/assets/18.png');
+          //   // this.images[i] = 'src/assets/18.png';
+          // }
+          // if (img == '13n') {
+          //   context.commit('SET_DATA05', 'src/assets/18.png');
+          //   // this.images[i] = 'src/assets/18.png';
+          // }
+          // if (img == '50d') {
+          //   context.commit('SET_DATA05', 'src/assets/6.png');
+          //   // this.images[i] = 'src/assets/6.png';
+          // }
+          // if (img == '50n') {
+          //   context.commit('SET_DATA05', 'src/assets/9.png');
+          //   // this.images[i] = 'src/assets/9.png';
+          // }
         })
         .catch((error) => {
           console.log(error);

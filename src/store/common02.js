@@ -3,9 +3,6 @@ import axios from 'axios';
 
 const SET_DATA04 = 'SET_DATA04';
 const exceptImg = {
-  '04': 35,
-  '09': 5,
-  11: 17,
   13: 18,
 };
 

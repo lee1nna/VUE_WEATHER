@@ -19,9 +19,6 @@
         default: 'Seoul',
       },
     },
-    // props: {
-    //   cityName: String,
-    // },
     data() {
       return {
         currentDate: dayjs().format('YYYY. MM. DD. ddd'), // display
