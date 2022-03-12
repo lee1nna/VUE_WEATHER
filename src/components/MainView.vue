@@ -31,9 +31,9 @@
         <p>이번주 날씨 보기</p>
       </div>
       <ul class="timelyWeatherBox">
-        <li class="timelyWeather" v-for="dataList in this.$store.state.COMMON_02.weather" :key="dataList">
+        <li class="timelyWeather" v-for="(dataList, index) in this.$store.state.COMMON_02.weather" :key="dataList">
           <div class="icon">
-            <img :src="this.$store.state.COMMON_02.images" alt="" />
+            <img :src="this.$store.state.COMMON_02.images[index]" alt="" />
           </div>
           <div class="data">
             <p class="time">
@@ -63,13 +63,12 @@
     created() {
       // Store의 Mutations를 실행할 때는, .commit() 메서드를
       // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
-      // this.$store.dispatch('COMMON_01/GET_DATA');
-      this.$store.dispatch('COMMON_01/CHANGED_DATA');
-
+      this.$store.dispatch('COMMON_01/GET_DATA');
+      // this.$store.dispatch('COMMON_01/CHANGED_DATA');
       this.$store.dispatch('COMMON_02/GET_DATA');
     },
     watch() {
-      this.$store.dispatch('COMMON_01/CHANGED_DATA');
+      // this.$store.dispatch('COMMON_04/CHANGED_DATA');
     },
     methods: {
       // 타임스탬프로 변환

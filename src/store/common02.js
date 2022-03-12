@@ -1,6 +1,14 @@
 // timely weather api - store
 import axios from 'axios';
 
+const SET_DATA04 = 'SET_DATA04';
+const exceptImg = {
+  '04': 35,
+  '09': 5,
+  11: 17,
+  13: 18,
+};
+
 export default {
   // namedspaced : 하나의 store에서 모듈화되어 사용될 수 있음을 명시적으로 나타내는 개념
   namespaced: true,
@@ -17,8 +25,7 @@ export default {
       }
     },
     SET_DATA04(state, payload) {
-      let img = [payload];
-      state.images = [img];
+      state.images.push(payload);
     },
   },
   actions: {
@@ -44,63 +51,17 @@ export default {
           context.commit('COMMON_02/SET_DATA03', res.data.hourly, { root: true });
 
           for (let i = 0; i < 24; i++) {
-            var img = res.data.hourly[i].weather[0].icon; // '01d'
+            let img = res.data.hourly[i].weather[0].icon; // '01d'
             // context.commit('COMMON_02/SET_DATA04', `http://openweathermap.org/img/wn/${img}@2x.png`, { root: true });
 
-            if (img == '01d') {
-              context.commit('SET_DATA04', 'src/assets/26.png');
-            }
-            if (img == '01n') {
-              context.commit('SET_DATA04', 'src/assets/10.png');
-            }
-            if (img == '04d') {
-              context.commit('SET_DATA04', 'src/assets/27.png');
-            }
-            if (img == '04n') {
-              context.commit('SET_DATA04', 'src/assets/31.png');
-            }
-            if (img == '03d') {
-              context.commit('SET_DATA04', 'src/assets/33.png');
-            }
-            if (img == '03n') {
-              context.commit('SET_DATA04', 'src/assets/32.png');
-            }
-            if (img == '04d') {
-              context.commit('SET_DATA04', 'src/assets/35.png');
-            }
-            if (img == '04n') {
-              context.commit('SET_DATA04', 'src/assets/35.png');
-            }
-            if (img == '09d') {
-              context.commit('SET_DATA04', 'src/assets/5.png');
-            }
-            if (img == '09n') {
-              context.commit('SET_DATA04', 'src/assets/5.png');
-            }
-            if (img == '10d') {
-              context.commit('SET_DATA04', 'src/assets/8.png');
-            }
-            if (img == '10n') {
-              context.commit('SET_DATA04', 'src/assets/1.png');
-            }
-            if (img == '11d') {
-              context.commit('SET_DATA04', 'src/assets/17.png');
-            }
-            if (img == '11n') {
-              context.commit('SET_DATA04', 'src/assets/17.png');
-            }
-            if (img == '13d') {
-              context.commit('SET_DATA04', 'src/assets/18.png');
-            }
-            if (img == '13n') {
-              context.commit('SET_DATA04', 'src/assets/18.png');
-            }
-            if (img == '50d') {
-              context.commit('SET_DATA04', 'src/assets/6.png');
-            }
-            if (img == '50n') {
-              context.commit('SET_DATA04', 'src/assets/9.png');
-            }
+            Object.keys(exceptImg).map((key) => {
+              const value = exceptImg[key];
+              if (typeof key === 'number') key = String(key);
+              if (typeof img === 'number') img = String(img);
+              if (img && img.includes(key)) img = value;
+            });
+
+            context.commit(SET_DATA04, `src/assets/${img}.png`);
           }
         })
         .catch((error) => {
