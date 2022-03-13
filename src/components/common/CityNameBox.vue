@@ -1,7 +1,7 @@
 <template>
   <div id="cityNameBox">
     <div class="cityName">
-      <p>{{ cityName }}</p>
+      <p>{{ this.$store.state.COMMON_01.cityName }}</p>
       <p>{{ currentDate }}</p>
     </div>
   </div>
@@ -13,16 +13,14 @@
   dayjs.locale('ko'); // global로 한국어 locale 사용
 
   export default {
-    props: {
-      cityName: {
-        type: String,
-        default: 'Seoul',
-      },
-    },
     data() {
       return {
         currentDate: dayjs().format('YYYY. MM. DD. ddd'), // display
+        cityName: 'Seoul',
       };
+    },
+    created() {
+      this.$store.dispatch('COMMON_01/GET_DATA');
     },
   };
 </script>

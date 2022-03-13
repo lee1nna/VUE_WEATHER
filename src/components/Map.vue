@@ -110,6 +110,8 @@
             // console.log(vm.markerLat);
             // console.log(vm.markerLon);
             vm.$store.dispatch('COMMON_01/SET_CHANGEDATA', marker.getPosition());
+            vm.$store.dispatch('COMMON_02/SET_CHANGEDATA', marker.getPosition());
+
             return marker;
           });
           // 아래 코드는 지도 위의 마커를 제거하는 코드입니다.

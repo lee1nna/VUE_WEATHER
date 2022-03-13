@@ -1,9 +1,41 @@
 // timely weather api - store
 import axios from 'axios';
 
-const SET_DATA04 = 'SET_DATA04';
+const SET_DATA02 = 'SET_DATA02';
 const exceptImg = {
   13: 18,
+};
+const changedCityDataHandle = (context) => {
+  // context : 매개변수 전달
+  const API_KEY2 = '1a5ef29484ff347e2245cf1814b07c77';
+  // console.log('changedData', context.state.changedData);
+  let lat = context.state.changedData.lat;
+  let lon = context.state.changedData.lon;
+
+  axios
+    .get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY2}&units=metric`)
+    .then((res) => {
+      // console.log(res.data);
+      // console.log(res.data.hourly);
+      context.commit('COMMON_02/SET_DATA01', res.data.hourly, { root: true });
+
+      for (let i = 0; i < 24; i++) {
+        let imgIcon = res.data.hourly[i].weather[0].icon; // '01d'
+        // context.commit('COMMON_02/SET_DATA04', `http://openweathermap.org/img/wn/${img}@2x.png`, { root: true });
+
+        Object.keys(exceptImg).map((key) => {
+          const value = exceptImg[key];
+          if (typeof key === 'number') key = String(key);
+          if (typeof imgIcon === 'number') imgIcon = String(imgIcon);
+          if (imgIcon && imgIcon.includes(key)) imgIcon = value;
+        });
+
+        context.commit(SET_DATA02, `src/assets/images/${imgIcon}.png`);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export default {
@@ -13,16 +45,25 @@ export default {
   state: {
     weather: [],
     images: [],
+    changedData: {
+      lat: '',
+      lon: '',
+    },
   },
   getters: {},
   mutations: {
-    SET_DATA03(state, payload) {
+    SET_DATA01(state, payload) {
       for (let i = 0; i < 24; i++) {
         state.weather[i] = payload[i];
       }
     },
-    SET_DATA04(state, payload) {
+    SET_DATA02(state, payload) {
       state.images.push(payload);
+    },
+
+    SET_CHANGEDATA(state, payload) {
+      state.changedData.lat = payload.Ma;
+      state.changedData.lon = payload.La;
     },
   },
   actions: {
@@ -45,25 +86,29 @@ export default {
         .then((res) => {
           // console.log(res.data);
           // console.log(res.data.hourly);
-          context.commit('COMMON_02/SET_DATA03', res.data.hourly, { root: true });
+          context.commit('COMMON_02/SET_DATA01', res.data.hourly, { root: true });
 
           for (let i = 0; i < 24; i++) {
-            let img = res.data.hourly[i].weather[0].icon; // '01d'
+            let imgIcon = res.data.hourly[i].weather[0].icon; // '01d'
             // context.commit('COMMON_02/SET_DATA04', `http://openweathermap.org/img/wn/${img}@2x.png`, { root: true });
 
             Object.keys(exceptImg).map((key) => {
               const value = exceptImg[key];
               if (typeof key === 'number') key = String(key);
-              if (typeof img === 'number') img = String(img);
-              if (img && img.includes(key)) img = value;
+              if (typeof imgIcon === 'number') imgIcon = String(imgIcon);
+              if (imgIcon && imgIcon.includes(key)) imgIcon = value;
             });
 
-            context.commit(SET_DATA04, `src/assets/${img}.png`);
+            context.commit(SET_DATA02, `src/assets/images/${imgIcon}.png`);
           }
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    SET_CHANGEDATA(context, payload) {
+      context.commit('SET_CHANGEDATA', payload);
+      changedCityDataHandle(context);
     },
   },
 };

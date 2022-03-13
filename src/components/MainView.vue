@@ -1,6 +1,6 @@
 <template>
   <div class="leftContainer">
-    <CityNameBox :cityName="cityName" />
+    <CityNameBox />
     <div id="contentsBox">
       <div class="buttonBox">
         <div class="buttonBackground">
@@ -33,7 +33,7 @@
       <ul class="timelyWeatherBox">
         <li class="timelyWeather" v-for="(dataList, index) in this.$store.state.COMMON_02.weather" :key="dataList">
           <div class="icon">
-            <img :src="this.$store.state.COMMON_02.images[index]" alt="" />
+            <img :src="imgUrl[index]" alt="" />
           </div>
           <div class="data">
             <p class="time">
@@ -41,7 +41,7 @@
             </p>
             <p class="currentDegree">{{ Math.round(dataList.temp) }}&deg;</p>
             <div>
-              <img src="~/assets/drop.png" alt="" />
+              <img src="~/assets/images/drop.png" alt="" />
               <p class="fall">{{ dataList.humidity }}%</p>
             </div>
           </div>
@@ -61,19 +61,16 @@
     components: { CityNameBox, NavUnderBar },
     data() {
       return {
-        cityName: this.$store.state.COMMON_01.cityName,
+        imgUrl: this.$store.state.COMMON_02.images,
       };
     },
     created() {
       // Store의 Mutations를 실행할 때는, .commit() 메서드를
       // Store의 Actions를 실행할 때는, .dispatch() 메서드를 사용한다.
       this.$store.dispatch('COMMON_01/GET_DATA');
-      // this.$store.dispatch('COMMON_01/CHANGED_DATA');
       this.$store.dispatch('COMMON_02/GET_DATA');
     },
-    watch() {
-      this.$store.dispatch('COMMON_01/SET_CHANGEDATA');
-    },
+
     methods: {
       // 타임스탬프로 변환
       Unix_timestamp(dt) {

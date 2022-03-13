@@ -12,7 +12,7 @@ const changedCityDataHandle = (context) => {
 
   console.log('changedData', context.state.changedData);
   // Contents Details
-  if (context.state.changedData.lat == 37.566826 && context.state.changedData.lon == 126.9786567) {
+  if (context.state.changedData.lon == 37.566826 && context.state.changedData.lat == 126.9786567) {
     CITY_NAME = 'Seoul';
   }
   if (context.state.changedData.lon == 37.40864282648821 && context.state.changedData.lat == 126.65071862847725) {
@@ -21,7 +21,7 @@ const changedCityDataHandle = (context) => {
   if (context.state.changedData.lon == 37.2911 && context.state.changedData.lat == 127.00889999999998) {
     CITY_NAME = 'Suwon';
   }
-  if (context.state.changedData.lon == 37.791688035246636 && context.state.changedData.lat == 128.82867301427635) {
+  if (context.state.changedData.lon == 37.791688035246636 && context.state.changedData.lat == 128.8286730142769) {
     CITY_NAME = 'gangneung';
   }
   if (context.state.changedData.lon == 37.15818414766273 && context.state.changedData.lat == 128.9285609661078) {
@@ -52,7 +52,7 @@ const changedCityDataHandle = (context) => {
     CITY_NAME = 'Jeju';
   }
 
-  console.log('CITY_NAME', CITY_NAME);
+  // console.log('CITY_NAME', CITY_NAME);
 
   // https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${api_key}&units=metric
   // https://api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${api_key}&units=metric
@@ -67,7 +67,9 @@ const changedCityDataHandle = (context) => {
       context.commit('SET_DATA04', [res.data.main.temp_max, res.data.main.temp_min, res.data.main.feels_like]);
 
       // console.log(res.data.weather[0].description);
-      var imgIcon = res.data.weather[0].icon; // '01d'
+      let imgIcon = res.data.weather[0].icon; // '01d'
+
+      // console.log(imgIcon);
 
       Object.keys(exceptImg).map((key) => {
         const value = exceptImg[key];
@@ -76,7 +78,7 @@ const changedCityDataHandle = (context) => {
         if (imgIcon && imgIcon.includes(key)) imgIcon = value;
       });
 
-      context.commit(SET_DATA05, `src/assets/${imgIcon}.png`);
+      context.commit(SET_DATA05, `src/assets/images/${imgIcon}.png`);
     })
     .catch((error) => {
       console.log(error);
@@ -128,8 +130,9 @@ export default {
   // getters : 계산된 상태를 만들어내는 속성, computed와 유사하다.
   // 실제 데이터를 계산된 형태로 바꾸어 새롭게 활용할 수 있다.
   getters: {
-    CHANGED_DATA(context) {
+    CHANGED_DATA(context, payload) {
       changedCityDataHandle(context);
+      context.commit('SET_CHANGEDATA', payload);
     },
   },
   // mutations, actions : methods와 유사하다.
@@ -211,7 +214,7 @@ export default {
             if (imgIcon && imgIcon.includes(key)) imgIcon = value;
           });
 
-          context.commit(SET_DATA05, `src/assets/${imgIcon}.png`);
+          context.commit(SET_DATA05, `src/assets/images/${imgIcon}.png`);
 
           // if (img == '01d') {
           //   context.commit('SET_DATA05', 'src/assets/26.png');
